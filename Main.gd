@@ -17,6 +17,7 @@ func _on_ColorTimer_timeout():
 	randomize()
 	$ColorPath/ColorSpawn.offset = randi()%int(get_viewport_rect().size.x)
 	var color = ColorBlock.instance()
+	color.value = randi()%10 + 1
 	add_child(color)
 	color.position = $ColorPath/ColorSpawn.position
 	color.velocity = Vector2.DOWN
