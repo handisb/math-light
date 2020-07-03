@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "blockConfig",
 "language": "GDScript",
-"path": "res://Block_Config.gd"
+"path": "res://config/Block_Config.gd"
 }, {
 "base": "Resource",
 "class": "playerConfig",
 "language": "GDScript",
-"path": "res://Player_Config.gd"
+"path": "res://config/Player_Config.gd"
 } ]
 _global_script_class_icons={
 "blockConfig": "",
