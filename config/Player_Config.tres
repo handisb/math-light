@@ -1,11 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://assets/player.png" type="Texture" id=1]
+[ext_resource path="res://assets/img/templatePlayerFace.png" type="Texture" id=1]
 [ext_resource path="res://config/Player_Config.gd" type="Script" id=2]
-
-
-
-
 
 [resource]
 script = ExtResource( 2 )
