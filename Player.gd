@@ -11,9 +11,11 @@ var configs = config_file.get_config()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#	if (playerConfig):
+#		$Sprite.texture = playerConfig.charSprite
+	var player_img_src = "res://" + configs["configurations"]["default"]["mathLight"]["scene01"]["player"]["imgSrc"]
+	$Sprite.texture = load(player_img_src)
 	
-	if (playerConfig):
-		$Sprite.texture = playerConfig.charSprite
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

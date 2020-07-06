@@ -23,6 +23,12 @@
 						"xPosition": 0,
 						"yPosition": 100
 					},
+					"player":{
+						"imgSrc": "assets/img/templatePlayerFace.png",
+						"spriteLabel": "playerSprite",
+						"xPosition": 0,
+						"yPosition": 100
+					},
 				}
 			}
 		},
