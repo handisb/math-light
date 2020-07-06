@@ -1,13 +1,17 @@
 extends KinematicBody2D
 
 export (Resource) var playerConfig
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 var speed = 400
+var config_file = MyConfigurations.new()
+var configs = config_file.get_config()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	if (playerConfig):
 		$Sprite.texture = playerConfig.charSprite
 

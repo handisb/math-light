@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "MyConfigurations",
+"language": "GDScript",
+"path": "res://config/Config.gd"
+}, {
 "base": "Resource",
 "class": "blockConfig",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://config/Player_Config.gd"
 } ]
 _global_script_class_icons={
+"MyConfigurations": "",
 "blockConfig": "",
 "playerConfig": ""
 }
