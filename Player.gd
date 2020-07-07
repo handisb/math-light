@@ -15,7 +15,6 @@ func _ready():
 #		$Sprite.texture = playerConfig.charSprite
 	var player_img_src = "res://" + configs["configurations"]["default"]["mathLight"]["scene01"]["player"]["imgSrc"]
 	$Sprite.texture = load(player_img_src)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
