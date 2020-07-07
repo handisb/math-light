@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PanelContainer",
+"class": "JsonDock",
+"language": "GDScript",
+"path": "res://addons/json_editor/json_dock.gd"
+}, {
 "base": "Resource",
 "class": "blockConfig",
 "language": "GDScript",
 "path": "res://config/Block_Config.gd"
+}, {
+"base": "Resource",
+"class": "mainConfig",
+"language": "GDScript",
+"path": "res://config/Main_Config.gd"
 }, {
 "base": "Resource",
 "class": "playerConfig",
@@ -20,7 +30,9 @@ _global_script_classes=[ {
 "path": "res://config/Player_Config.gd"
 } ]
 _global_script_class_icons={
+"JsonDock": "",
 "blockConfig": "",
+"mainConfig": "",
 "playerConfig": ""
 }
 

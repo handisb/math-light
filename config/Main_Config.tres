@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://config/Main_Config.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+expressionList = [ "3+2", "10-3", "1+2", "20/10", "8+2", "9-3" ]

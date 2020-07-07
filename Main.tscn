@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://ColorBlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://config/Main_Config.tres" type="Resource" id=4]
 [ext_resource path="res://Hud.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
@@ -13,6 +14,7 @@ _data = {
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 ColorBlock = ExtResource( 3 )
+mainConfig = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 

@@ -5,11 +5,13 @@ export (Resource) var playerConfig
 # var a = 2
 # var b = "text"
 var speed = 400
+var expression
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if (playerConfig):
 		$Sprite.texture = playerConfig.charSprite
+		$CollisionShape2D.shape.extents = $Sprite.texture.get_size()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,3 +25,4 @@ func _process(delta):
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += speed
 	position += velocity*delta
+	$Sprite/Label.text = expression
