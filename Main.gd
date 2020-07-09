@@ -2,31 +2,62 @@ extends Node2D
 
 export (PackedScene) var ColorBlock
 export (Resource) var mainConfig
+var playerList
 var score = 0
 var index = 0
+var correctAnswer
 onready var expression = Expression.new()
+
+func getCorrectAnswer():
+	if (mainConfig.gameMode == "math"):
+		var error = expression.parse($Player.value, [])
+		if (error != OK):
+			print(error)
+		correctAnswer = expression.execute([], null, true)
+		if (expression.has_execute_failed()):
+			print("ruhroh")
+	elif (mainConfig.gameMode == "english"):
+		correctAnswer = mainConfig.letterList[mainConfig.wordList.find($Player.value)]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	$ColorTimer.start()
-	mainConfig.expressionList.shuffle()
-	$Player.expression = mainConfig.expressionList[index]
+	$Hud/GameTimer.start(mainConfig.gameTime)
+# warning-ignore:return_value_discarded
+	$Hud/GameTimer.connect("timeout", self, "_on_GameTimer_timeout")
+	
+	if (mainConfig.gameMode == "math"):
+		playerList = mainConfig.expressionList.duplicate()
+	elif (mainConfig.gameMode == "english"):
+		playerList = mainConfig.wordList.duplicate()
+	
+	playerList.shuffle()
+	$Player.value = playerList[index]
+	getCorrectAnswer()
 
 func scoring(block):
-	var error = expression.parse($Player.expression, [])
-	if (error != OK):
-		print(error)
-	var result = expression.execute([], null, true)
-	if (expression.has_execute_failed()):
-		print("ruhroh")
-	if (block.value == result):
+	if (block.value == correctAnswer):
 		score+=1
 
 func _on_ColorTimer_timeout():
 	$ColorPath/ColorSpawn.offset = randi()%int(get_viewport_rect().size.x)
 	var color = ColorBlock.instance()
-	color.value = randi()%10 + 1
+	if (mainConfig.gameMode == "math"):
+		if (randf() <= mainConfig.correctProbability):
+			color.value = correctAnswer
+		else:
+			var randomValue = correctAnswer
+			while (randomValue == correctAnswer):
+				randomValue = randi()%10 + 1
+			color.value = randomValue
+	elif (mainConfig.gameMode == "english"):
+		var blockList = mainConfig.letterList.duplicate()
+		blockList.erase(correctAnswer)
+		if (randf() <= mainConfig.correctProbability):
+			color.value = correctAnswer
+		else:
+			color.value = blockList[randi()%blockList.size()]
 	add_child(color)
 	color.position = $ColorPath/ColorSpawn.position
 	color.velocity = Vector2.DOWN
@@ -36,8 +67,9 @@ func _on_ColorTimer_timeout():
 func _on_ColorBlock_body_entered(_body, block):
 	scoring(block)
 	index+=1
-	$Player.expression = mainConfig.expressionList[index%mainConfig.expressionList.size()]
+	$Player.value = playerList[index%playerList.size()]
+	getCorrectAnswer()
 	$Hud/ScoreLabel.text = ("Score: " + str(score))
 
-func _on_StartTimer_timeout():
-	$ColorTimer.start()
+func _on_GameTimer_timeout():
+	get_tree().quit()

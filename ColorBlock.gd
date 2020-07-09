@@ -12,7 +12,7 @@ func _ready():
 	blockFont.size = blockConfig.blockFontSize
 	if (blockConfig):
 		$Sprite.texture = blockConfig.blockSprite
-	$CollisionShape2D.shape.extents = $Sprite.texture.get_size()
+	$CollisionShape2D.shape.extents = $Sprite.texture.get_size()/2
 	$Sprite/Label.set("custom_fonts/font", blockFont)
 	$Sprite/Label.text = str(value)
 	$Sprite/Label.show()

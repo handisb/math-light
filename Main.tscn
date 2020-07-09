@@ -26,8 +26,5 @@ curve = SubResource( 1 )
 [node name="ColorTimer" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="StartTimer" type="Timer" parent="."]
-
 [node name="Hud" parent="." instance=ExtResource( 5 )]
 [connection signal="timeout" from="ColorTimer" to="." method="_on_ColorTimer_timeout"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
