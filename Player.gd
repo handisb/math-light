@@ -27,4 +27,4 @@ func _process(delta):
 	# audio test
 	if (Input.is_key_pressed(KEY_1)):
 		if ($audio_player):
-			$audio_player.play_audio("test")
+			$audio_player.play_audio("reward")
