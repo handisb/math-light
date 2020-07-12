@@ -2,17 +2,12 @@ extends KinematicBody2D
 
 export (Resource) var playerConfig
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var speed = 400
 var config_file = MyConfigurations.new()
 var configs = config_file.get_config()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	if (playerConfig):
-#		$Sprite.texture = playerConfig.charSprite
 	var player_img_src = "res://" + configs["configurations"]["default"]["mathLight"]["scene01"]["player"]["imgSrc"]
 	$Sprite.texture = load(player_img_src)
 
@@ -28,3 +23,8 @@ func _process(delta):
 	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
 		velocity.y += speed
 	position += velocity*delta
+	
+	# audio test
+	if (Input.is_key_pressed(KEY_1)):
+		if ($audio_player):
+			$audio_player.play_audio("test")
