@@ -10,3 +10,4 @@ blockSprite = ExtResource( 1 )
 blockSpriteSize = Vector2( 16, 16 )
 blockFontData = ExtResource( 3 )
 blockFontSize = 16
+blockSpeed = 40

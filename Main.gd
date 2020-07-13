@@ -3,6 +3,7 @@ extends Node2D
 export (PackedScene) var ColorBlock
 export (Resource) var mainConfig
 var playerList
+var blockList
 var score = 0
 var index = 0
 var correctAnswer
@@ -13,13 +14,28 @@ func getCorrectAnswer():
 		var error = expression.parse($Player.value, [])
 		if (error != OK):
 			print(error)
-		correctAnswer = expression.execute([], null, true)
+		var result = expression.execute([], null, true)
 		if (expression.has_execute_failed()):
 			print("ruhroh")
+		return result
 	elif (mainConfig.gameMode == "english"):
-		correctAnswer = mainConfig.letterList[mainConfig.wordList.find($Player.value)]
+		return mainConfig.letterList[mainConfig.wordList.find($Player.value)]
 	elif (mainConfig.gameMode == "shape"):
-		correctAnswer = mainConfig.blockShapeList[mainConfig.playerShapeList.find($Player.value)]
+		return mainConfig.blockShapeList[mainConfig.playerShapeList.find($Player.value)]
+
+func getPlayerList():
+	if (mainConfig.gameMode == "math"):
+		return mainConfig.expressionList.duplicate()
+	elif (mainConfig.gameMode == "english"):
+		return mainConfig.wordList.duplicate()
+	elif (mainConfig.gameMode == "shape"):
+		return mainConfig.playerShapeList.duplicate()
+
+func getBlockList():
+	if (mainConfig.gameMode == "english"):
+		return mainConfig.letterList.duplicate()
+	elif (mainConfig.gameMode == "shape"):
+		return mainConfig.blockShapeList.duplicate()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -28,16 +44,14 @@ func _ready():
 # warning-ignore:return_value_discarded
 	$Hud/GameTimer.connect("timeout", self, "_on_GameTimer_timeout")
 	
-	if (mainConfig.gameMode == "math"):
-		playerList = mainConfig.expressionList.duplicate()
-	elif (mainConfig.gameMode == "english"):
-		playerList = mainConfig.wordList.duplicate()
-	elif (mainConfig.gameMode == "shape"):
-		playerList = mainConfig.playerShapeList.duplicate()
+	$ColorPath.curve.clear_points()
+	$ColorPath.curve.add_point(Vector2.ZERO)
+	$ColorPath.curve.add_point(Vector2(get_viewport().size.x, 0))
 	
+	playerList = getPlayerList()
 	playerList.shuffle()
 	$Player.value = playerList[index]
-	getCorrectAnswer()
+	correctAnswer = getCorrectAnswer()
 
 func scoring(block):
 	if (block.value == correctAnswer):
@@ -52,15 +66,8 @@ func setBlockValue(color):
 			while (randomValue == correctAnswer):
 				randomValue = randi()%10 + 1
 			color.value = randomValue
-	elif (mainConfig.gameMode == "english"):
-		var blockList = mainConfig.letterList.duplicate()
-		blockList.erase(correctAnswer)
-		if (randf() <= mainConfig.correctProbability):
-			color.value = correctAnswer
-		else:
-			color.value = blockList[randi()%blockList.size()]
-	elif (mainConfig.gameMode == "shape"):
-		var blockList = mainConfig.blockShapeList.duplicate()
+	else:
+		blockList = getBlockList()
 		blockList.erase(correctAnswer)
 		if (randf() <= mainConfig.correctProbability):
 			color.value = correctAnswer
@@ -82,10 +89,11 @@ func _on_ColorTimer_timeout():
 
 func _on_ColorBlock_body_entered(_body, block):
 	scoring(block)
-	index+=1
-	$Player.value = playerList[index%playerList.size()]
-	getCorrectAnswer()
+	if (block.value == correctAnswer):
+		index+=1
+		$Player.value = playerList[index%playerList.size()]
+	correctAnswer = getCorrectAnswer()
 	$Hud/ScoreLabel.text = ("Score: " + str(score))
 
 func _on_GameTimer_timeout():
-	get_tree().quit()
+	get_tree().paused = true

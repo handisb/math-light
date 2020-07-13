@@ -10,11 +10,11 @@
 
 [resource]
 script = ExtResource( 1 )
-gameMode = "english"
+gameMode = "shape"
 expressionList = [ "3+2", "10-3", "1+2", "20/10", "8+2", "9-3" ]
 wordList = [ "c_r", "y_n", "w_n", "t_n", "f_n" ]
 letterList = [ "a", "e", "i", "o", "u" ]
 playerShapeList = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
 blockShapeList = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
-correctProbability = 1.0
+correctProbability = 0.5
 gameTime = 50
