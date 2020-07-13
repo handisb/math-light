@@ -17,9 +17,9 @@
 					},
 				},
 				"scene01": {
-					"background":{
-						"imgSrc": "assets/img/loadingScreenAsset.png",
-						"spriteLabel": "loadScreen",
+					"floor":{
+						"imgSrc": "assets/img/floorBgAsset.png",
+						"spriteLabel": "scene01_floor",
 						"xPosition": 0,
 						"yPosition": 100
 					},

@@ -1,0 +1,43 @@
+{
+	"configurations": {
+		"default": {
+			"mathLight": {
+				"scene00":{
+					"background":{
+						"imgSrc": "assets/img/loadingScreenAsset.png",
+						"spriteLabel": "loadScreen",
+						"xPosition": 0,
+						"yPosition": 100
+					},
+					"text":{
+						"imgSrc": "assets/img/loadingTextAsset.png",
+						"spriteLabel": "loadText",
+						"xPosition": 0,
+						"yPosition": 10
+					},
+				},
+				"scene01": {
+					"background":{
+						"imgSrc": "assets/img/loadingScreenAsset.png",
+						"spriteLabel": "loadScreen",
+						"xPosition": 0,
+						"yPosition": 100
+					},
+					"player":{
+						"imgSrc": "assets/img/templatePlayerFace.png",
+						"spriteLabel": "playerSprite",
+						"xPosition": 0,
+						"yPosition": 100
+					},
+				}
+			}
+		},
+		"saves": [],
+		"mainScreen":{
+			"screenWidth": 297,
+			"screenHeight": 812,
+			"phoneWidth": 360,
+			"phoneHeight": 740
+		}
+	}
+}
