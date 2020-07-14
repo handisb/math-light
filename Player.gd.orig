@@ -1,0 +1,82 @@
+extends KinematicBody2D
+
+export (Resource) var playerConfig
+<<<<<<< HEAD
+var mainConfig = preload("res://config/Main_Config.tres")
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+var maxSpeed = 400
+var velocity = Vector2()
+var inputMode = "keyboard"
+var mousePos = Vector2()
+var value
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if (playerConfig):
+		$PlayerSprite.texture = playerConfig.charSprite
+		$CollisionShape2D.shape.extents = $PlayerSprite.texture.get_size()/2
+	position = get_viewport_rect().size/2
+
+func _input(event):
+	if (event is InputEventMouseButton):
+		inputMode = "mouse"
+		mousePos = event.position
+
+func move(delta):
+	var speed = maxSpeed
+	if (inputMode == "keyboard"):
+		var LEFT = Input.is_action_pressed("ui_left")
+		var RIGHT = Input.is_action_pressed("ui_right")
+		var DOWN = Input.is_action_pressed("ui_down")
+		var UP = Input.is_action_pressed("ui_up")
+		
+		velocity.x = -int(LEFT) + int(RIGHT)
+		velocity.y = -int(UP) + int(DOWN)
+	elif (inputMode == "mouse"):
+		velocity = mousePos - position
+		var nextPosition = position + velocity.normalized()*maxSpeed*delta
+		if (abs((mousePos - nextPosition).length()) < 5):
+			speed = velocity.length()/delta
+	
+	position += velocity.normalized()*speed*delta
+=======
+
+var speed = 400
+var config_file = MyConfigurations.new()
+var configs = config_file.get_config()
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var player_img_src = "res://" + configs["configurations"]["default"]["mathLight"]["scene01"]["player"]["imgSrc"]
+	$Sprite.texture = load(player_img_src)
+>>>>>>> feature/pathlight-to-godot
+
+func drawValue():
+	if (mainConfig.gameMode != "shape"):
+		$PlayerSprite/Value.text = value
+	else:
+		$PlayerSprite/ValueSprite.texture = value
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+<<<<<<< HEAD
+	move(delta)
+	drawValue()
+=======
+	var velocity = Vector2()
+	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
+		velocity.x += speed
+	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
+		velocity.x -= speed
+	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
+		velocity.y -= speed
+	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
+		velocity.y += speed
+	position += velocity*delta
+	
+	# audio test
+	if (Input.is_key_pressed(KEY_1)):
+		if ($audio_player):
+			$audio_player.play_audio("reward")
+>>>>>>> feature/pathlight-to-godot

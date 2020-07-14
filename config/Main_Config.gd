@@ -9,3 +9,6 @@ export (Array, Texture) var playerShapeList
 export (Array, Texture) var blockShapeList
 export (float) var correctProbability
 export (int) var gameTime
+
+export (Array, String) var musicNames
+export (Array, AudioStream) var music

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://config/Main_Config.gd" type="Script" id=1]
 [ext_resource path="res://assets/shapes/player/circle.png" type="Texture" id=2]
@@ -7,10 +7,12 @@
 [ext_resource path="res://assets/shapes/blocks/square.png" type="Texture" id=5]
 [ext_resource path="res://assets/shapes/blocks/circle.png" type="Texture" id=6]
 [ext_resource path="res://assets/shapes/blocks/triangle.png" type="Texture" id=7]
+[ext_resource path="res://assets/audio/jingle.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/audio/bodenstaendig2000InRock4bit.ogg" type="AudioStream" id=9]
 
 [resource]
 script = ExtResource( 1 )
-gameMode = "shape"
+gameMode = "math"
 expressionList = [ "3+2", "10-3", "1+2", "20/10", "8+2", "9-3" ]
 wordList = [ "c_r", "y_n", "w_n", "t_n", "f_n" ]
 letterList = [ "a", "e", "i", "o", "u" ]
@@ -18,3 +20,5 @@ playerShapeList = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
 blockShapeList = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 correctProbability = 0.5
 gameTime = 50
+musicNames = [ "bodenstaendig2000InRock4Bit", "jingle" ]
+music = [ ExtResource( 9 ), ExtResource( 8 ) ]

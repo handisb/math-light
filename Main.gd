@@ -52,6 +52,10 @@ func _ready():
 	playerList.shuffle()
 	$Player.value = playerList[index]
 	correctAnswer = getCorrectAnswer()
+	
+	$GameOver.hide()
+	
+	$audio_player.play_audio("bodenstaendig2000InRock4Bit", true)
 
 func scoring(block):
 	if (block.value == correctAnswer):
@@ -92,8 +96,11 @@ func _on_ColorBlock_body_entered(_body, block):
 	if (block.value == correctAnswer):
 		index+=1
 		$Player.value = playerList[index%playerList.size()]
+		$audio_player.play_audio("jingle", false)
 	correctAnswer = getCorrectAnswer()
 	$Hud/ScoreLabel.text = ("Score: " + str(score))
 
 func _on_GameTimer_timeout():
+	$GameOver.score = score
+	$GameOver.show()
 	get_tree().paused = true
