@@ -1,4 +1,5 @@
 extends Resource
 class_name playerConfig
 
-export (Texture) var charSprite
+export (Array, Texture) var playerWalkSprites
+export (float) var playerPercentageSize
