@@ -32,6 +32,15 @@
 				},
 				"audioTracks": {
 					"reward": "assets/audio/jingle.wav"
+				},
+				"visualEffects":{
+					"particles": {
+						"imgSrc": "assets/img/whiteParticle.png",
+						"spriteLabel": "particles",
+						"scale": 0.1,
+						"xPosition": 0,
+						"yPosition": 100
+					}
 				}
 			}
 		},
