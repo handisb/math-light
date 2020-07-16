@@ -16,6 +16,8 @@ var aPlayer
 
 var value
 
+var equationPositionX
+
 #func animationSetup():
 #	var walkAnimation = Animation.new()
 #	walkAnimation.add_track(0)
@@ -51,6 +53,7 @@ func _ready():
 		$PlayerSprite.texture = playerConfig.playerWalkSprites[0]
 		currentSpriteIndex = 0
 		scaleSprites()
+		equationPositionX = $PlayerSprite/Value.get_rect().position.x
 	position = get_viewport_rect().size/2
 
 func _input(event):
@@ -67,8 +70,14 @@ func animate(delta):
 		$PlayerSprite.texture = playerConfig.playerWalkSprites[int(currentSpriteIndex)%playerConfig.playerWalkSprites.size()]
 		if (direction == "right"):
 			$PlayerSprite.set_flip_h(true)
+			$PlayerSprite/Value.set_position(Vector2(equationPositionX, $PlayerSprite/Value.get_rect().position.y))
 		else:
 			$PlayerSprite.set_flip_h(false)
+			# find midpoint of equation label along x-position and add to its default x-position
+			var equationMidPoint = $PlayerSprite/Value.get_rect().size.x / 2 + equationPositionX
+			# new x-position is flipped to other side
+			var new_x = equationMidPoint * -1
+			$PlayerSprite/Value.set_position(Vector2(new_x, $PlayerSprite/Value.get_rect().position.y))
 
 func move(delta):
 	var speed = maxSpeed
