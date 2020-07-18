@@ -12,7 +12,7 @@ func _ready():
 	var img_src = "res://" + configs["configurations"]["default"]["mathLight"]["visualEffects"]["particles"]["imgSrc"]
 	scale_amount = configs["configurations"]["default"]["mathLight"]["visualEffects"]["particles"]["scale"]
 	texture = load(img_src)
-	set_emitting(true)
+	set_emitting(false)
 
 func run_particles():
 	set_emitting(true)

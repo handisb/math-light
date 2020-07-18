@@ -5,7 +5,7 @@
 [ext_resource path="res://config/Player_Config.tres" type="Resource" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31, 30 )
+extents = Vector2( 68, 51 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -14,9 +14,9 @@ playerConfig = ExtResource( 3 )
 [node name="PlayerSprite" type="Sprite" parent="."]
 
 [node name="Value" type="Label" parent="PlayerSprite"]
-margin_left = -64.0
+margin_left = -62.0
 margin_top = -46.0
-margin_right = -24.0
+margin_right = -25.0
 margin_bottom = -32.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )

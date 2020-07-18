@@ -17,7 +17,13 @@ var aPlayer
 var value
 
 var equationPositionX
+var maxPositionX
+var maxPositionY
+var minPositionX
+var minPositionY
 
+var posX
+var sizeX
 #func animationSetup():
 #	var walkAnimation = Animation.new()
 #	walkAnimation.add_track(0)
@@ -53,8 +59,16 @@ func _ready():
 		$PlayerSprite.texture = playerConfig.playerWalkSprites[0]
 		currentSpriteIndex = 0
 		scaleSprites()
-		equationPositionX = $PlayerSprite/Value.get_rect().position.x
+		equationPositionX = -1 * (abs($PlayerSprite/Value.get_rect().position.x) - $PlayerSprite/Value.get_rect().size.x/2)
 	position = get_viewport_rect().size/2
+	
+	# get dimensions of collision box and get difference for max player positions
+	var collision = $CollisionShape2D.shape.get_extents()
+	maxPositionX = position.x * 2 - collision.x
+	maxPositionY = position.y * 2 - collision.y
+	minPositionX = collision.x
+	minPositionY = collision.y
+
 
 func _input(event):
 	if (event is InputEventMouseButton):
@@ -97,12 +111,25 @@ func move(delta):
 			velocity.x = 0
 		velocity.y = -int(UP) + int(DOWN)
 	elif (inputMode == "mouse"):
+		# if mouse position is left of current position, face left
+		if (mousePos.x < position.x):
+			direction = "left"
+		elif (mousePos.x > position.x):
+			direction = "right"
 		velocity = mousePos - position
 		var nextPosition = position + velocity.normalized()*maxSpeed*delta
 		if (abs((mousePos - nextPosition).length()) < 5):
 			speed = velocity.length()/delta
-	
+	# retain current position
+	var prevPosition = position
+
+	# if new position is out of viewport ranges, set new position as previous position
 	position += velocity.normalized()*speed*delta
+	if (position.x > maxPositionX) or (position.x < minPositionX) \
+		or (abs(position.y) > maxPositionY) or (position.y < minPositionY):
+		position = prevPosition
+		# set velocity to 0 to prevent player moving in place
+		velocity = position - position
 
 func drawValue():
 	if (mainConfig.gameMode != "shape"):
