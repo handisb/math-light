@@ -3,5 +3,14 @@
 [ext_resource path="res://visual_effects/particleEffects.gd" type="Script" id=1]
 
 [node name="particles" type="CPUParticles2D"]
+emitting = false
+amount = 20
 lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2( 0, 100 )
+initial_velocity = 50.0
+initial_velocity_random = 1.0
+angular_velocity_random = 1.0
 script = ExtResource( 1 )

@@ -16,6 +16,7 @@ func _ready():
 
 func run_particles():
 	set_emitting(true)
+	restart()
 
 func stop_particles():
 	set_emitting(false)

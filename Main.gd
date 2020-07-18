@@ -97,6 +97,7 @@ func _on_ColorBlock_body_entered(_body, block):
 		index+=1
 		$Player.value = playerList[index%playerList.size()]
 		$audio_player.play_audio("jingle", false)
+		$Player/PlayerSprite/Value/particles.run_particles()
 	correctAnswer = getCorrectAnswer()
 	$Hud/ScoreLabel.text = ("Score: " + str(score))
 
