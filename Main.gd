@@ -55,7 +55,7 @@ func _ready():
 	
 	$GameOver.hide()
 	
-	$audio_player.play_audio("bodenstaendig2000InRock4Bit", true)
+	$audio_player.play_audio("bodenstaendig2000InRock4Bit", false, true)
 
 func scoring(block):
 	if (block.value == correctAnswer):
@@ -81,8 +81,11 @@ func setBlockValue(color):
 func createBlock(color):
 	color.position = $ColorPath/ColorSpawn.position
 	color.velocity = Vector2.DOWN
-	color.connect("body_entered", color, "_on_ColorBlock_body_entered")
+	#color.connect("body_entered", color, "_on_ColorBlock_body_entered")
 	color.connect("body_entered", self, "_on_ColorBlock_body_entered", [color])
+
+func activatePlayerParticles():
+	$Player/PlayerSprite/Value/particles.emitting = true;
 
 func _on_ColorTimer_timeout():
 	$ColorPath/ColorSpawn.offset = randi()%int(get_viewport_rect().size.x)
@@ -96,7 +99,9 @@ func _on_ColorBlock_body_entered(_body, block):
 	if (block.value == correctAnswer):
 		index+=1
 		$Player.value = playerList[index%playerList.size()]
-		$audio_player.play_audio("jingle", false)
+		$audio_player.play_audio("jingle", true, false)
+		block.queue_free()
+		activatePlayerParticles()
 	correctAnswer = getCorrectAnswer()
 	$Hud/ScoreLabel.text = ("Score: " + str(score))
 

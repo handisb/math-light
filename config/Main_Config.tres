@@ -17,5 +17,5 @@ playerShapeList = [  ]
 blockShapeList = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]
 correctProbability = 0.5
 gameTime = 50
-musicNames = [  ]
+musicNames = [ "bodenstaendig2000InRock4Bit", "jingle" ]
 music = [ ExtResource( 9 ), ExtResource( 8 ) ]

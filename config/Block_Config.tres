@@ -10,4 +10,5 @@ blockSprite = ExtResource( 1 )
 blockPercentageSize = 0.003
 blockFontData = ExtResource( 3 )
 blockFontSize = 16
+blockFontPercentageSize = 1.0
 blockSpeed = 40

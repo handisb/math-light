@@ -5,7 +5,7 @@ var mainConfig = preload("res://config/Main_Config.tres")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var maxSpeed = 400
+var maxSpeed = 400*OS.get_screen_dpi()/96
 var velocity = Vector2()
 var inputMode = "keyboard"
 var mousePos = Vector2()
@@ -55,6 +55,7 @@ func _ready():
 		scaleSprites()
 		equationPositionX = $PlayerSprite/Value.get_rect().position.x
 	position = get_viewport_rect().size/2
+	$PlayerSprite/Value/particles.emitting = false
 
 func _input(event):
 	if (event is InputEventMouseButton):
@@ -87,20 +88,18 @@ func move(delta):
 		var DOWN = Input.is_action_pressed("ui_down")
 		var UP = Input.is_action_pressed("ui_up")
 		
-		if (LEFT):
-			velocity.x = -1
-			direction = "left"
-		elif (RIGHT):
-			velocity.x = 1
-			direction = "right"
-		else:
-			velocity.x = 0
+		velocity.x = -int(LEFT) + int(RIGHT)
 		velocity.y = -int(UP) + int(DOWN)
 	elif (inputMode == "mouse"):
 		velocity = mousePos - position
 		var nextPosition = position + velocity.normalized()*maxSpeed*delta
 		if (abs((mousePos - nextPosition).length()) < 5):
 			speed = velocity.length()/delta
+	
+	if (velocity.x < 0):
+		direction = "left"
+	elif (velocity.x > 0):
+		direction = "right"
 	
 	position += velocity.normalized()*speed*delta
 

@@ -30,6 +30,8 @@ __meta__ = {
 
 [node name="particles" parent="PlayerSprite/Value" instance=ExtResource( 1 )]
 position = Vector2( 19, 17 )
+emitting = false
+one_shot = true
 
 [node name="ValueSprite" type="Sprite" parent="PlayerSprite"]
 
