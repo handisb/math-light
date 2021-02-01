@@ -94,6 +94,8 @@ func move(delta):
 		velocity = mousePos - position
 		var nextPosition = position + velocity.normalized()*maxSpeed*delta
 		if (abs((mousePos - nextPosition).length()) < 5):
+			if delta == 0:
+				delta = 0.1
 			speed = velocity.length()/delta
 	
 	if (velocity.x < 0):

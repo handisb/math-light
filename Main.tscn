@@ -4,9 +4,9 @@
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://ColorBlock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://config/Main_Config.tres" type="Resource" id=4]
-[ext_resource path="res://Hud.tscn" type="PackedScene" id=5]
+[ext_resource path="res://config/Audio_Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://backgrounds/Floor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://config/Audio_Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Hud.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GameOver.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Curve2D" id=1]
@@ -30,12 +30,12 @@ curve = SubResource( 1 )
 [node name="ColorTimer" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="Hud" parent="." instance=ExtResource( 5 )]
+[node name="Hud" parent="." instance=ExtResource( 7 )]
 
 [node name="GameOver" parent="." instance=ExtResource( 8 )]
 
 [node name="Floor" parent="." instance=ExtResource( 6 )]
 z_index = -1000
 
-[node name="audio_player" parent="." instance=ExtResource( 7 )]
+[node name="audio_player" parent="." instance=ExtResource( 5 )]
 [connection signal="timeout" from="ColorTimer" to="." method="_on_ColorTimer_timeout"]
