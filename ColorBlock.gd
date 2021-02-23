@@ -6,6 +6,8 @@ var SPEED
 var velocity = Vector2(0, 0)
 var value
 
+var params
+onready var utility = preload('scripts/utility.gd').new()
 
 func scaleSprite(blockFont):
 	var sprite = $Sprite.texture
@@ -16,15 +18,23 @@ func scaleSprite(blockFont):
 	var fontPercentage = fontArea/blockArea
 	var blockScaleBy = blockConfig.blockPercentageSize/blockPercentage
 	var fontScaleBy = blockConfig.blockFontPercentageSize/fontPercentage
-	
+
 	$Sprite.set_scale(Vector2(sqrt(blockScaleBy), sqrt(blockScaleBy)))
 	blockFont.size = 16*blockConfig.blockFontPercentageSize*OS.get_screen_dpi()/(96*sqrt(blockScaleBy))
 	$CollisionShape2D.shape.extents = sprite.get_size()*sqrt(blockScaleBy)/2
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	params = {}
 	var blockFont = DynamicFont.new()
 	blockFont.font_data = blockConfig.blockFontData
-	blockFont.size = blockConfig.blockFontSize
+
+	# TODO: hard code blockfont size for now, need to convert to dynamic later
+	# blockFont.size = blockConfig.blockFontSize
+	blockFont.size = 32
+
+	params['blockFont'] = blockFont
 	SPEED = blockConfig.blockSpeed
 	if (mainConfig.gameMode != "shape"):
 		$Sprite.texture = blockConfig.blockSprite
@@ -33,8 +43,11 @@ func _ready():
 		$Sprite/Label.show()
 	else:
 		$Sprite.texture = value
-	scaleSprite(blockFont)
-	$Sprite/Label.set_position(-$Sprite.texture.get_size()/4)
+	# TODO: leave scaling out for now since it is handled by Godot environments
+	#scaleSprite(blockFont)	
+#	var label_h = $Sprite.texture.get_size()[1]
+#	var label_w = $Sprite.texture.get_size()[0]
+	$Sprite/Label.set_position(-$Sprite.texture.get_size()/2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
