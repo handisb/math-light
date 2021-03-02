@@ -18,7 +18,7 @@
 				},
 				"scene01": {
 					"floor":{
-						"imgSrc": "assets/img/Mathlight_BG_Graphics.png",
+						"imgSrc": "assets/img/Background_Graphic.svg",
 						"spriteLabel": "scene01_floor",
 						"xPosition": 0,
 						"yPosition": 100

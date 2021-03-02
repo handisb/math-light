@@ -103,7 +103,7 @@ func _on_ColorBlock_body_entered(_body, block):
 		block.queue_free()
 		activatePlayerParticles()
 	correctAnswer = getCorrectAnswer()
-	$Hud/ScoreLabel.text = ("Score: " + str(score))
+	$Hud/ScoreSprite/ScoreLabel.text = ("Score: " + str(score))
 
 func _on_GameTimer_timeout():
 	$GameOver.score = score

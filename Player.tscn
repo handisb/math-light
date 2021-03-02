@@ -14,10 +14,11 @@ playerConfig = ExtResource( 3 )
 [node name="PlayerSprite" type="Sprite" parent="."]
 
 [node name="Value" type="Label" parent="PlayerSprite"]
-margin_left = -64.0
-margin_top = -46.0
-margin_right = -24.0
-margin_bottom = -32.0
+margin_left = -109.488
+margin_top = -117.147
+margin_right = -69.4877
+margin_bottom = -103.147
+rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 1, 0, 0, 1 )
@@ -30,8 +31,6 @@ __meta__ = {
 
 [node name="particles" parent="PlayerSprite/Value" instance=ExtResource( 1 )]
 position = Vector2( 19, 17 )
-emitting = false
-one_shot = true
 
 [node name="ValueSprite" type="Sprite" parent="PlayerSprite"]
 

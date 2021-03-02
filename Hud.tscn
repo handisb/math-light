@@ -1,18 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GameTimer.gd" type="Script" id=1]
 [ext_resource path="res://TestFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/img/Score_Graphic.svg" type="Texture" id=3]
 
 [node name="Node" type="Node"]
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="ScoreSprite" type="Sprite" parent="."]
+position = Vector2( 1117, 56 )
+texture = ExtResource( 3 )
+
+[node name="ScoreLabel" type="Label" parent="ScoreSprite"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -184.0
-margin_top = -1.0
-margin_bottom = 38.0
+margin_left = -260.0
+margin_top = -14.0
+margin_right = -113.0
+margin_bottom = 25.0
 custom_fonts/font = ExtResource( 2 )
-text = "Score: 0"
+text = "Score:0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,10 +27,17 @@ __meta__ = {
 wait_time = 30.0
 script = ExtResource( 1 )
 
-[node name="TimerLabel" type="Label" parent="GameTimer"]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="TimerSprite" type="Sprite" parent="GameTimer"]
+position = Vector2( 123, 55 )
+texture = ExtResource( 3 )
+
+[node name="TimerLabel" type="Label" parent="GameTimer/TimerSprite"]
+margin_left = -37.0
+margin_top = -13.0
+margin_right = 78.0
+margin_bottom = 26.0
 custom_fonts/font = ExtResource( 2 )
+text = "Timer: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
