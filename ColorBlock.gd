@@ -45,9 +45,7 @@ func _ready():
 		$Sprite.texture = value
 	# TODO: leave scaling out for now since it is handled by Godot environments
 	#scaleSprite(blockFont)	
-#	var label_h = $Sprite.texture.get_size()[1]
-#	var label_w = $Sprite.texture.get_size()[0]
-	$Sprite/Label.set_position(-$Sprite.texture.get_size()/2)
+	$Sprite/Label.set_position(-$Sprite.texture.get_size()/3)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
